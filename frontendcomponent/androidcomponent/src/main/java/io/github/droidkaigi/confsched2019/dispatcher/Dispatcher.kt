@@ -8,6 +8,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.channels.filter
 import kotlinx.coroutines.channels.map
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -27,6 +28,7 @@ class Dispatcher @Inject constructor() {
         // `_actions.send()` is called simultaneously from multiple threads
         // https://github.com/Kotlin/kotlinx.coroutines/blob/1.0.1/common/kotlinx-coroutines-core-common/src/channels/ConflatedBroadcastChannel.kt#L227-L230
         withContext(CoroutinePlugin.mainDispatcher) {
+            delay(3000L)
             _actions.send(action)
         }
     }
